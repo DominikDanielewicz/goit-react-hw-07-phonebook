@@ -3,21 +3,10 @@ import ContactListElement from 'components/ContactListElement/ContactListElement
 import propTypes from 'prop-types';
 import css from './ContactList.module.css';
 import { useSelector } from 'react-redux';
-import { getContacts, getContactsFilter } from 'redux/selectors';
-
-const getFilteredContacts = (filterQuery, contacts) => {
-  console.log(contacts);
-  return contacts.filter(
-    contact =>
-      filterQuery === '' ||
-      contact.name.toLowerCase().includes(filterQuery.toLowerCase())
-  );
-};
+import { selectFilteredContacts } from 'redux/selectors';
 
 const ContactList = () => {
-  const contacts = useSelector(getContacts);
-  const filterQuery = useSelector(getContactsFilter);
-  const filteredContacts = getFilteredContacts(filterQuery, contacts);
+  const filteredContacts = useSelector(selectFilteredContacts);
 
   return (
     <ul className={css.contactlist}>
